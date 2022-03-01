@@ -1,5 +1,5 @@
 const id = {
-    MESSAGE: 0
+    HEARTBEAT: 0
 };
 
 module.exports = id;

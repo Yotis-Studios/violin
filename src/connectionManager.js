@@ -22,12 +22,44 @@ class ConnectionManager {
             }
         }, 60000);
     }
-
     addConnection(connection) {
+        let connID = undefined;
+        // Assign lowest available connection ID
+        for (let i = 0; connID === undefined; i++) {
+            if (this.connections[i] === undefined) {
+            connID = i;
+            }
+        }
+        this.connections[connID] = connection;
+        // Start heartbeat timer
+        this.heartbeat[connID] = Date.now();
     }
-
     removeConnection(connection) {
-
+        const id = this.getIDFromConnection(connection);
+        if (id === undefined) return;
+        delete this.connections[id];
+        delete this.heartbeat[id];
+        connection.kick();
+        console.log(`Closed connection ${id}`);
+    }
+    swapConnections(i, j) {
+        const temp = this.connections[i];
+        this.connections[i] = this.connections[j];
+        this.connections[j] = temp;
+    }
+    getIDFromConnection(connection) {
+        if (connection === undefined) return undefined;
+        for (let i in this.connections) {
+            if (this.connections[i] === connection) return i;
+        }
+        return undefined;
+    }
+    killServer(code) {
+        this.server.close();
+        process.exit(code); 
+    }
+    updateHeartbeat(id) {
+        this.heartbeat[id] = Date.now();
     }
 }
 
