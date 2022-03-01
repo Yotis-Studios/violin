@@ -6,9 +6,9 @@ class ConnectionManager {
         this.server = server;
         this.game = game;
 
-        // Destroy this server if the host doesn't connect in 60 seconds
+        // Destroy this server if noone connects within 60 seconds
         setTimeout(() => {
-            if (this.connections[this.game.host] === undefined) this.killServer(1);
+            if (this.connections[0] === undefined) this.killServer(1);
         }, 60000);
 
         // Cull connections that fail heartbeat check every 60 seconds
@@ -33,12 +33,15 @@ class ConnectionManager {
         this.connections[connID] = connection;
         // Start heartbeat timer
         this.heartbeat[connID] = Date.now();
+        // Add player to game
+        this.game.addPlayer(connID);
     }
     removeConnection(connection) {
         const id = this.getIDFromConnection(connection);
         if (id === undefined) return;
         delete this.connections[id];
         delete this.heartbeat[id];
+        this.game.removePlayer(id);
         connection.kick();
         console.log(`Closed connection ${id}`);
     }
