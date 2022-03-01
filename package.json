@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/Yotis-Studios/violin#readme",
   "dependencies": {
-    "get-port": "^6.1.2",
+    "get-port": "^5.0.0",
     "shocknet": "github:Yotis-Studios/shocknet-js"
   }
 }
