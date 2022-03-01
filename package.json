@@ -1,0 +1,23 @@
+{
+  "name": "violin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yotis-Studios/violin.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Yotis-Studios/violin/issues"
+  },
+  "homepage": "https://github.com/Yotis-Studios/violin#readme",
+  "dependencies": {
+    "get-port": "^6.1.2",
+    "shocknet": "github:Yotis-Studios/shocknet-js"
+  }
+}
